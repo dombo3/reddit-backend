@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?><database>
+    <element db_object_id="b82846a68361221018c19965eeaad3b7" label="Post" max_length="40" name="x_1298781_reddit_r_post" type="collection">
+        <element attributes="encode_utf8=false" label="Owner" max_length="32" name="owner" reference="sys_user" type="reference"/>
+        <element attributes="edge_encryption_enabled=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="Title" max_length="40" name="title" type="string"/>
+        <element attributes="edge_encryption_enabled=true" label="URL" max_length="1024" name="url" type="url"/>
+        <element label="Score" max_length="40" name="score" type="integer"/>
+        <index name="index">
+            <element name="owner"/>
+        </index>
+    </element>
+</database>

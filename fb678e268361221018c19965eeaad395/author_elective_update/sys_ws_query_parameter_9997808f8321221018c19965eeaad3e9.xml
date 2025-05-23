@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_query_parameter">
+    <sys_ws_query_parameter action="DELETE">
+        <example_value>http://probablycorey.com/url-hunter/</example_value>
+        <name>url</name>
+        <required>false</required>
+        <short_description/>
+        <sys_class_name>sys_ws_query_parameter</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-05-20 18:39:18</sys_created_on>
+        <sys_id>9997808f8321221018c19965eeaad3e9</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>url</sys_name>
+        <sys_package display_value="Reddit - REST Backend" source="x_1298781_reddit_r">fb678e268361221018c19965eeaad395</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="Reddit - REST Backend">fb678e268361221018c19965eeaad395</sys_scope>
+        <sys_update_name>sys_ws_query_parameter_9997808f8321221018c19965eeaad3e9</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-05-20 18:39:18</sys_updated_on>
+        <web_service_definition display_value="Reddit Backend">15ba4e6a8361221018c19965eeaad369</web_service_definition>
+    </sys_ws_query_parameter>
+    <sys_update_version action="INSERT_OR_UPDATE">
+        <action>DELETE</action>
+        <application display_value="Reddit - REST Backend">fb678e268361221018c19965eeaad395</application>
+        <file_path/>
+        <instance_id>ba37a8861b1e755039a54089bd4bcb3e</instance_id>
+        <instance_name>dev205060</instance_name>
+        <name>sys_ws_query_parameter_9997808f8321221018c19965eeaad3e9</name>
+        <payload><![CDATA[<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_query_parameter"><sys_ws_query_parameter action="INSERT_OR_UPDATE"><example_value>http://probablycorey.com/url-hunter/</example_value><name>url</name><required>false</required><short_description/><sys_class_name>sys_ws_query_parameter</sys_class_name><sys_created_by>admin</sys_created_by><sys_created_on>2025-05-20 18:39:18</sys_created_on><sys_id>9997808f8321221018c19965eeaad3e9</sys_id><sys_mod_count>0</sys_mod_count><sys_name>url</sys_name><sys_package display_value="Reddit - REST Backend" source="x_1298781_reddit_r">fb678e268361221018c19965eeaad395</sys_package><sys_policy/><sys_scope display_value="Reddit - REST Backend">fb678e268361221018c19965eeaad395</sys_scope><sys_update_name>sys_ws_query_parameter_9997808f8321221018c19965eeaad3e9</sys_update_name><sys_updated_by>admin</sys_updated_by><sys_updated_on>2025-05-20 18:39:18</sys_updated_on><web_service_definition display_value="Reddit Backend">15ba4e6a8361221018c19965eeaad369</web_service_definition></sys_ws_query_parameter></record_update>]]></payload>
+        <payload_hash>1970626304</payload_hash>
+        <record_name>url</record_name>
+        <reverted_from/>
+        <source>fb67c6668361221018c19965eeaad359</source>
+        <source_table>sys_update_set</source_table>
+        <state>previous</state>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-05-20 18:39:19</sys_created_on>
+        <sys_id>70a7008f8321221018c19965eeaad334</sys_id>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_recorded_at>196eefe33cf0000001</sys_recorded_at>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-05-20 18:39:19</sys_updated_on>
+        <type>Scripted REST Query Parameter</type>
+        <update_guid>64a7008f0f2122105fefd602f07a7e33</update_guid>
+        <update_guid_history>64a7008f0f2122105fefd602f07a7e33:1970626304</update_guid_history>
+    </sys_update_version>
+    <sys_metadata_delete action="INSERT_OR_UPDATE">
+        <sys_audit_delete/>
+        <sys_class_name>sys_metadata_delete</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2025-05-20 18:52:08</sys_created_on>
+        <sys_db_object display_value="" name="sys_ws_query_parameter">sys_ws_query_parameter</sys_db_object>
+        <sys_id>a6c5976892984bccbef82c7154524111</sys_id>
+        <sys_metadata>9997808f8321221018c19965eeaad3e9</sys_metadata>
+        <sys_mod_count>0</sys_mod_count>
+        <sys_name>url</sys_name>
+        <sys_package display_value="Reddit - REST Backend" source="x_1298781_reddit_r">fb678e268361221018c19965eeaad395</sys_package>
+        <sys_parent/>
+        <sys_policy/>
+        <sys_scope display_value="Reddit - REST Backend">fb678e268361221018c19965eeaad395</sys_scope>
+        <sys_scope_delete display_value="">35c1b4997e914c5ea2d684c3cb8da764</sys_scope_delete>
+        <sys_update_name>sys_ws_query_parameter_9997808f8321221018c19965eeaad3e9</sys_update_name>
+        <sys_update_version display_value="sys_ws_query_parameter_9997808f8321221018c19965eeaad3e9">70a7008f8321221018c19965eeaad334</sys_update_version>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2025-05-20 18:52:08</sys_updated_on>
+    </sys_metadata_delete>
+</record_update>
