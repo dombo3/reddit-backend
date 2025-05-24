@@ -5,38 +5,39 @@
         <consumes_customized>false</consumes_customized>
         <default_operation_uri/>
         <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
-        <http_method>GET</http_method>
-        <name>GET post/{sys_id}</name>
+        <http_method>POST</http_method>
+        <name>Voting</name>
         <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
     var sys_id = request.pathParams.sys_id || "";
-    var resp;
 
     if (!sys_id) {
-        response.setError(new sn_ws_err.BadRequestError('Missing sys_id'));
+        response.setError(new sn_ws_err.BadRequestError("Missing sys_id"));
         return;
     }
 
-    var post = new GlideRecord('x_1298781_reddit_r_post');
+    var post = new GlideRecord("x_1298781_reddit_r_post");
+
     if (!post.get(sys_id)) {
-        response.setError(new sn_ws_err.NotFoundError(`Post not found`));
-		return;
+        response.setError(new sn_ws_err.NotFoundError("Post not found!"));
+        return;
+
     }
 
-    resp = {
-        "id": post.getUniqueValue(),
-        "url": post.url,
-        "title": post.title,
-        "score": post.score,
-        "owner": post.owner,
-        "created": post.sys_created_on
-    };
+    post.score += 1;
+    post.update();
 
-    response.setBody(resp);
+    response.setBody({
+        "sys_id": post.sys_id,
+        "title": post.title,
+        "display_value": post.getDisplayValue(),
+        "score": post.score
+    });
+	
 })(request, response);]]></operation_script>
-        <operation_uri>/api/x_1298781_reddit_r/reddit_backend/post/{sys_id}</operation_uri>
+        <operation_uri>/api/x_1298781_reddit_r/reddit_backend/post/{sys_id}/vote</operation_uri>
         <produces>application/json,application/xml,text/xml</produces>
         <produces_customized>false</produces_customized>
-        <relative_path>/post/{sys_id}</relative_path>
+        <relative_path>/post/{sys_id}/vote</relative_path>
         <request_example/>
         <requires_acl_authorization>true</requires_acl_authorization>
         <requires_authentication>true</requires_authentication>
@@ -44,27 +45,27 @@
         <short_description/>
         <sys_class_name>sys_ws_operation</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2025-05-23 10:53:16</sys_created_on>
-        <sys_id>028835fb83a5221018c19965eeaad337</sys_id>
-        <sys_mod_count>11</sys_mod_count>
-        <sys_name>GET post/{sys_id}</sys_name>
+        <sys_created_on>2025-05-24 08:32:51</sys_created_on>
+        <sys_id>f9cf52c483f1221018c19965eeaad3fd</sys_id>
+        <sys_mod_count>9</sys_mod_count>
+        <sys_name>Voting</sys_name>
         <sys_package display_value="Reddit - REST Backend" source="x_1298781_reddit_r">fb678e268361221018c19965eeaad395</sys_package>
         <sys_policy/>
         <sys_scope display_value="Reddit - REST Backend">fb678e268361221018c19965eeaad395</sys_scope>
-        <sys_update_name>sys_ws_operation_028835fb83a5221018c19965eeaad337</sys_update_name>
+        <sys_update_name>sys_ws_operation_f9cf52c483f1221018c19965eeaad3fd</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-05-24 08:37:06</sys_updated_on>
+        <sys_updated_on>2025-05-24 08:41:51</sys_updated_on>
         <web_service_definition display_value="Reddit Backend">15ba4e6a8361221018c19965eeaad369</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
     <sys_es_latest_script action="INSERT_OR_UPDATE">
-        <id>028835fb83a5221018c19965eeaad337</id>
+        <id>f9cf52c483f1221018c19965eeaad3fd</id>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2025-05-23 10:53:16</sys_created_on>
-        <sys_id>8bb9b17f83a5221018c19965eeaad334</sys_id>
+        <sys_created_on>2025-05-24 08:32:48</sys_created_on>
+        <sys_id>2323224083f1221018c19965eeaad36a</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-05-23 10:53:16</sys_updated_on>
+        <sys_updated_on>2025-05-24 08:32:48</sys_updated_on>
         <table>sys_ws_operation</table>
         <use_es_latest>true</use_es_latest>
     </sys_es_latest_script>
