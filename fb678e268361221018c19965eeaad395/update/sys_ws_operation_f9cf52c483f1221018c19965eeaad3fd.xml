@@ -6,7 +6,7 @@
         <default_operation_uri/>
         <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
         <http_method>POST</http_method>
-        <name>Voting</name>
+        <name>POST /post/{sys_id}/vote</name>
         <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
     var sys_id = request.pathParams.sys_id || "";
 
@@ -15,22 +15,52 @@
         return;
     }
 
+	var body = request.body;
+
+	if (!body || !body.data || !body.data.hasOwnProperty("score")) {
+		response.setError(new sn_ws_err.BadRequestError("Missing score"));
+		return;
+	}
+	
+	var score = Number(body.data.score);
+
+	if (!Number.isInteger(score) || (score !== 1 && score !== -1)) {
+		response.setError(new sn_ws_err.BadRequestError("Score must be either 1 or -1"));
+		return;
+	}
+
     var post = new GlideRecord("x_1298781_reddit_r_post");
 
     if (!post.get(sys_id)) {
         response.setError(new sn_ws_err.NotFoundError("Post not found!"));
         return;
-
     }
 
-    post.score += 1;
-    post.update();
+	var userID = gs.getUserID();
+	var postID = post.getUniqueValue();
+
+	var vote = new GlideRecord("x_1298781_reddit_r_vote");
+	vote.addQuery("user", userID);
+	vote.addQuery("post", postID);
+	vote.query();
+
+	if (vote.hasNext()) {
+		response.setError(new sn_ws_err.NotAcceptableError("User allowed one vote per post"));
+		return;
+	}
+
+	var newVote = new GlideRecord("x_1298781_reddit_r_vote");
+	newVote.user = userID;
+	newVote.post = postID;
+	newVote.value = score;
+	newVote.insert();
+
+	var currentScore = new ScoreCalculator().calculateScore(postID);
 
     response.setBody({
         "sys_id": post.sys_id,
         "title": post.title,
-        "display_value": post.getDisplayValue(),
-        "score": post.score
+        "score": currentScore
     });
 	
 })(request, response);]]></operation_script>
@@ -47,14 +77,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2025-05-24 08:32:51</sys_created_on>
         <sys_id>f9cf52c483f1221018c19965eeaad3fd</sys_id>
-        <sys_mod_count>9</sys_mod_count>
-        <sys_name>Voting</sys_name>
+        <sys_mod_count>35</sys_mod_count>
+        <sys_name>POST /post/{sys_id}/vote</sys_name>
         <sys_package display_value="Reddit - REST Backend" source="x_1298781_reddit_r">fb678e268361221018c19965eeaad395</sys_package>
         <sys_policy/>
         <sys_scope display_value="Reddit - REST Backend">fb678e268361221018c19965eeaad395</sys_scope>
         <sys_update_name>sys_ws_operation_f9cf52c483f1221018c19965eeaad3fd</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-05-24 08:41:51</sys_updated_on>
+        <sys_updated_on>2025-05-24 12:33:08</sys_updated_on>
         <web_service_definition display_value="Reddit Backend">15ba4e6a8361221018c19965eeaad369</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>

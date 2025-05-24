@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?><database>
     <element db_object_id="beb882e68361221018c19965eeaad354" label="Vote" max_length="40" name="x_1298781_reddit_r_vote" type="collection">
+        <element label="Post" max_length="32" name="post" reference="x_1298781_reddit_r_post" type="reference"/>
         <element attributes="encode_utf8=false" label="User" max_length="32" name="user" reference="sys_user" type="reference"/>
         <element label="Value" max_length="40" name="value" type="integer"/>
         <element attributes="edge_encryption_enabled=true" default="javascript:global.getNextObjNumberPadded();" label="Number" max_length="40" name="number" type="string"/>
         <index name="index">
+            <element name="post"/>
+        </index>
+        <index name="index2">
             <element name="user"/>
         </index>
     </element>

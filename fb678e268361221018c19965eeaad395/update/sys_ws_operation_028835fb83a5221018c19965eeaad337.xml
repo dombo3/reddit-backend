@@ -26,7 +26,7 @@
         "id": post.getUniqueValue(),
         "url": post.url,
         "title": post.title,
-        "score": post.score,
+        "score": new ScoreCalculator().calculateScore(post.getUniqueValue()),
         "owner": post.owner,
         "created": post.sys_created_on
     };
@@ -46,14 +46,14 @@
         <sys_created_by>admin</sys_created_by>
         <sys_created_on>2025-05-23 10:53:16</sys_created_on>
         <sys_id>028835fb83a5221018c19965eeaad337</sys_id>
-        <sys_mod_count>11</sys_mod_count>
+        <sys_mod_count>13</sys_mod_count>
         <sys_name>GET post/{sys_id}</sys_name>
         <sys_package display_value="Reddit - REST Backend" source="x_1298781_reddit_r">fb678e268361221018c19965eeaad395</sys_package>
         <sys_policy/>
         <sys_scope display_value="Reddit - REST Backend">fb678e268361221018c19965eeaad395</sys_scope>
         <sys_update_name>sys_ws_operation_028835fb83a5221018c19965eeaad337</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-05-24 08:37:06</sys_updated_on>
+        <sys_updated_on>2025-05-24 12:39:20</sys_updated_on>
         <web_service_definition display_value="Reddit Backend">15ba4e6a8361221018c19965eeaad369</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
