@@ -5,23 +5,30 @@
         <consumes_customized>false</consumes_customized>
         <default_operation_uri/>
         <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
-        <http_method>DELETE</http_method>
-        <name>Delete Post</name>
+        <http_method>PUT</http_method>
+        <name>PUT post</name>
         <operation_script><![CDATA[(function process( /*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
 
-    var sys_id = request.pathParams.sys_id || "";
+	var sys_id = request.pathParams.sys_id || "";
     if (!sys_id) {
         response.setError(new sn_ws_err.BadRequestError("Missing sys_id!"));
         return;
     }
 
-    var post = new GlideRecord("x_1298781_reddit_r_post");
-    if (!post.get(sys_id)) {
-        response.setError(new sn_ws_err.NotFoundError('Post not found'));
+    var url = request.body.data.url || "";
+    var title = request.body.data.title || "";
+    if (!url && !title) {
+        response.setError(new sn_ws_err.BadRequestError('Either "url" and "title" fields are required.'));
         return;
     }
 
-    if (post.owner != gs.getUserID()) {
+    var postGr = new GlideRecord("x_1298781_reddit_r_post");
+	if (!postGr.get(sys_id)) {
+        response.setError(new sn_ws_err.NotFoundError('Post not found'));
+		return;
+    }
+
+	if (postGr.owner != gs.getUserID()) {
         var myError = new sn_ws_err.ServiceError();
         myError.setStatus(403);
         myError.setMessage("Forbidden");
@@ -29,17 +36,26 @@
         return;
     }
 
-    var votes = new GlideRecord("x_1298781_reddit_r_vote");
-    votes.addQuery("post", sys_id);
-    votes.query();
-    votes.deleteMultiple();
+	if (url) {
+		postGr.url = url;
+	}
 
-    if (!post.deleteRecord()) {
-        response.setError(new sn_ws_err.ServiceError("Delete unsuccessful"));
-        return;
-    }
+	if (title) {
+		postGr.title = title;
+	}
 
-    response.setStatus(204);
+	postGr.update();
+
+    response.setStatus(200);
+    response.setBody({
+        "id": postGr.getUniqueValue(),
+        "url": postGr.url,
+        "title": postGr.title,
+        "score": postGr.score,
+        "owner": postGr.owner,
+		"created": postGr.sys_created_on
+    });
+
 })(request, response);]]></operation_script>
         <operation_uri>/api/x_1298781_reddit_r/reddit_backend/post/{sys_id}</operation_uri>
         <produces>application/json,application/xml,text/xml</produces>
@@ -52,27 +68,27 @@
         <short_description/>
         <sys_class_name>sys_ws_operation</sys_class_name>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2025-05-27 07:55:05</sys_created_on>
-        <sys_id>e4a1f1018371221018c19965eeaad36c</sys_id>
-        <sys_mod_count>6</sys_mod_count>
-        <sys_name>Delete Post</sys_name>
+        <sys_created_on>2025-05-27 08:49:45</sys_created_on>
+        <sys_id>7ab14e8183b1221018c19965eeaad3c2</sys_id>
+        <sys_mod_count>1</sys_mod_count>
+        <sys_name>PUT post</sys_name>
         <sys_package display_value="Reddit - REST Backend" source="x_1298781_reddit_r">fb678e268361221018c19965eeaad395</sys_package>
         <sys_policy/>
         <sys_scope display_value="Reddit - REST Backend">fb678e268361221018c19965eeaad395</sys_scope>
-        <sys_update_name>sys_ws_operation_e4a1f1018371221018c19965eeaad36c</sys_update_name>
+        <sys_update_name>sys_ws_operation_7ab14e8183b1221018c19965eeaad3c2</sys_update_name>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-05-27 08:46:44</sys_updated_on>
+        <sys_updated_on>2025-05-27 08:52:58</sys_updated_on>
         <web_service_definition display_value="Reddit Backend">15ba4e6a8361221018c19965eeaad369</web_service_definition>
         <web_service_version/>
     </sys_ws_operation>
     <sys_es_latest_script action="INSERT_OR_UPDATE">
-        <id>e4a1f1018371221018c19965eeaad36c</id>
+        <id>7ab14e8183b1221018c19965eeaad3c2</id>
         <sys_created_by>admin</sys_created_by>
-        <sys_created_on>2025-05-27 07:55:04</sys_created_on>
-        <sys_id>f347f5058371221018c19965eeaad3f8</sys_id>
+        <sys_created_on>2025-05-27 08:49:45</sys_created_on>
+        <sys_id>f0d3028583b1221018c19965eeaad37a</sys_id>
         <sys_mod_count>0</sys_mod_count>
         <sys_updated_by>admin</sys_updated_by>
-        <sys_updated_on>2025-05-27 07:55:04</sys_updated_on>
+        <sys_updated_on>2025-05-27 08:49:45</sys_updated_on>
         <table>sys_ws_operation</table>
         <use_es_latest>true</use_es_latest>
     </sys_es_latest_script>
